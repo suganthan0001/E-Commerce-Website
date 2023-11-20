@@ -1,0 +1,40 @@
+{
+    "products": [
+      {
+        "id": "1",
+        "name": "Apples",
+        "description": "Fresh and delicious apples. Packed with natural sweetness.",
+        "price": 150.00,
+        "imageUrl":"apple.jpg"
+      },
+      {
+        "id": "2",
+        "name": "Spinach",
+        "description": "Nutrient-rich spinach, perfect for salads or cooking.",
+        "price": 175.00,
+        "imageUrl":"spinach.jpg"
+      },
+      {
+        "id": "3",
+        "name": "Quinoa",
+        "description": "High-quality quinoa, a versatile and protein-packed grain.",
+        "price": 250.00,
+        "imageUrl":"quinoa.jpg"
+      },
+      {
+        "id": "4",
+        "name": "Avocado",
+        "description": "Creamy and nutritious avocados for a healthy diet.",
+        "price": 120.00,
+        "imageUrl":"avocado.jpg"
+      },
+      {
+        "id": "5",
+        "name": "Honey",
+        "description": "Pure and natural honey, a sweet and healthy alternative.",
+        "price": 500.00,
+        "imageUrl":"honey.jpeg"
+      }
+    ]
+  }
+  
