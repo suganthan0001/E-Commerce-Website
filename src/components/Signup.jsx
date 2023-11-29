@@ -1,4 +1,3 @@
-// Signup.jsx
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import profiles from "../profiles.json";
@@ -20,7 +19,7 @@ export default function Signup() {
     if (profiles.some((profile) => profile.username === username)) {
       alert("Username is already taken");
       return;
-    }
+    } 
 
 
     const newProfile = {

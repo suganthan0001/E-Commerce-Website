@@ -15,6 +15,12 @@ function App() {
   const [isNavbarScrolled, setNavbarScrolled] = useState(false);
   const [isLogIn, setisLogIn] = useState(false);
   const [likedItems, setLikedItems] = useState([]);
+  const [cartItems, setcartItems] = useState([]);
+  function addToCart(productId){
+    setcartItems((prevItems) => {
+      return [...prevItems, productId];
+    })
+  }
   
   const updateLikedItems = (newLikedItems) => {
     setLikedItems(newLikedItems);
@@ -55,6 +61,7 @@ function App() {
       onLikeToggle={() => handleLikeToggle(eachItem.id)}
       isLogged={isLogIn}
       initialIsLiked={likedItems.some((item) => item.id === eachItem.id)}
+      addToCart = {addToCart}
     />
   ));
 
@@ -73,7 +80,7 @@ function App() {
   return (
     <Router>
       <>
-        <Navbar isScrolled={isNavbarScrolled} isLogged={isLogIn} />
+        <Navbar isScrolled={isNavbarScrolled} isLogged={isLogIn} cartArray = {cartItems}/>
         <Routes>
           <Route
             path="/"
@@ -111,7 +118,11 @@ function App() {
           />
           <Route 
             path="/cart"
-            element = {<Cart />}
+            element = {
+            <Cart 
+              cartItems = {cartItems}
+            />
+          }
           />
         </Routes>
       </>

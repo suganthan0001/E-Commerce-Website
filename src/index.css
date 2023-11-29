@@ -331,6 +331,7 @@ Link{
 
 
 .cart-container{
+  margin-top: 7%;
   height: 100vh;
   width: 100%;
   display: grid;
@@ -339,8 +340,11 @@ Link{
 
 .cart-products{
   display: grid;
-  grid-template-columns: repeat(3,1fr);
-  row-gap: 10%;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 5%;
+  gap: 10%;
+  padding: 5%;
+  height: fit-content;
 }
 
 .price-details{
@@ -349,3 +353,77 @@ Link{
   flex-direction: column;
   justify-content: flex-start;
 }
+
+.product-card-cart {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  transition: 0.3s;
+}
+
+.product-image-cart {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin-right: 16px;
+  border-radius: 4px;
+}
+
+.product-details-cart {
+  flex: 1;
+}
+
+.product-name-cart {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.product-price-cart {
+  margin: 0;
+  color: #506635;
+}
+
+.product-actions-cart {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-controls-cart {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.quantity-btn-cart {
+  background-color: #a7cc78;
+  color: #fff;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 0;
+  border-radius: 4px;
+}
+
+.quantity-cart {
+  margin: 0 8px;
+}
+
+.delete-icon-container {
+  cursor: pointer;
+}
+
+.delete-icon {
+  color: #ff0000;
+  font-size: 1.5em;
+}
+

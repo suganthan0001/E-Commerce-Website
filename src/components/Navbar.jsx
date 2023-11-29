@@ -1,8 +1,7 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Navbar({ isScrolled, isLogged}) {
+function Navbar({ isScrolled, isLogged,cartArray}) {
   const navbarStyle = {
     backgroundColor: isScrolled ? "#cee87b" : "transparent",
   };
@@ -18,7 +17,7 @@ function Navbar({ isScrolled, isLogged}) {
         <img className="companyLogo" src="./images/companyLogo.png" alt="Company Logo" />
       </Link>
       <div className="nav-right">
-      <Link to="/cart"><i class="fa-solid fa-cart-shopping"></i></Link>
+      {cartArray.length>0 && <Link to="/cart"><i class="fa-solid fa-cart-shopping"></i></Link>}
       {!isLogged && <Link to="/login" ><button className="btn">Log in</button></Link>}
       {!isLogged && <Link to="/signup" ><button className="btn">Sign up</button></Link>}
       {
