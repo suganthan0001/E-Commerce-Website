@@ -21,6 +21,13 @@ function App() {
       return [...prevItems, productId];
     })
   }
+
+  function deleteFromMainCart(id){
+    setcartItems((prevItems) => {
+      const withDeletedItem = prevItems.filter(item => item != id)
+      return withDeletedItem;
+    })
+  }
   
   const updateLikedItems = (newLikedItems) => {
     setLikedItems(newLikedItems);
@@ -77,6 +84,8 @@ function App() {
     };
   }, []);
 
+  
+
   return (
     <Router>
       <>
@@ -120,6 +129,7 @@ function App() {
             path="/cart"
             element = {
             <Cart 
+              deleteFromMainCart={deleteFromMainCart}
               cartItems = {cartItems}
             />
           }

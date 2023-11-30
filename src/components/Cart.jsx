@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from "react";
 import data from "../products.json";
-import Product from "./Product";
 import CartProduct from "./CartProduct";
 
-export default function Cart({ cartItems }) {
-
+export default function Cart({ cartItems ,deleteFromMainCart}) {
     const [productsWithFreq, setProductsWithFreq] = useState({});
+    const [cartProducts,setCartProducts] = useState([]);
 
-    const cartProducts = data.products.filter((item) => {
-        return cartItems.includes(item.id);
-    })
-
-    console.log(cartProducts);
+    useEffect(
+        () => {
+            setCartProducts(() => {
+                const cartProductsToReturn = data.products.filter((item) => {
+                    return cartItems.includes(item.id);
+                })
+                return cartProductsToReturn;
+            })
+        }
+    ,[cartItems]);
 
     useEffect(() => {
         cartProducts.forEach((item) => {
             if (item.id in productsWithFreq) {
                 var toIncrease = productsWithFreq[item.id] + 1;
-
                 setProductsWithFreq(
                     (oldFreq) => {
                         return { ...oldFreq, [item.id]: toIncrease }
@@ -31,9 +34,7 @@ export default function Cart({ cartItems }) {
                 )
             }
         })
-    }, [data.products, cartItems]);
-
-
+    }, [data.products, cartItems,cartProducts]);
 
 
     function increment(id) {
@@ -44,17 +45,26 @@ export default function Cart({ cartItems }) {
                 return { ...oldFreq, [id]: toIncrease }
             }
         )
-        console.log(productsWithFreq);
+
     }
 
     function decrement(id) {
         setProductsWithFreq(
             (oldFreq) => {
                 var toDecrease = productsWithFreq[id] - 1;
+                if(toDecrease == 0){
+                    return {...oldFreq}
+                }
                 return { ...oldFreq, [id]: toDecrease }
             }
         )
         console.log(productsWithFreq);
+    }
+
+    function deleteCartItem(id){
+        deleteFromMainCart(id);
+        const updatedCartProducts = cartProducts.filter(item => item.id !== id);
+        setCartProducts(updatedCartProducts);
     }
 
 
@@ -65,6 +75,7 @@ export default function Cart({ cartItems }) {
             increment={increment}
             decrement={decrement}
             item={eachItem}
+            deleteCartItem={deleteCartItem}
         />
     })
 

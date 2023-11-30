@@ -17,7 +17,7 @@ function Navbar({ isScrolled, isLogged,cartArray}) {
         <img className="companyLogo" src="./images/companyLogo.png" alt="Company Logo" />
       </Link>
       <div className="nav-right">
-      {cartArray.length>0 && <Link to="/cart"><i class="fa-solid fa-cart-shopping"></i></Link>}
+      {cartArray.length>0 && <Link to="/cart"><i className="fa-solid fa-cart-shopping"></i></Link>}
       {!isLogged && <Link to="/login" ><button className="btn">Log in</button></Link>}
       {!isLogged && <Link to="/signup" ><button className="btn">Sign up</button></Link>}
       {
