@@ -16,6 +16,8 @@ export default function LikedItems({ likedItems, isLogged, onLikeToggle, updateL
                 initialIsLiked={true} 
                 productsWithFreq={productsWithFreq}
                 addToCart={addToCart}
+                onLikeToggle={onLikeToggle}
+                updateLikedItems = {updateLikedItems}
               />
             ))}
           </div>
