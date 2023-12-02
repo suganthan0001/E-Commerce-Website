@@ -16,6 +16,55 @@ function App() {
   const [isLogIn, setisLogIn] = useState(false);
   const [likedItems, setLikedItems] = useState([]);
   const [cartItems, setcartItems] = useState([]);
+  const [productsWithFreq, setProductsWithFreq] = useState({});
+  const updateProductsWithFreq = (cartItems) => {
+    const productsWithFreq = {};
+    cartItems.forEach((id) => {
+      if (id in productsWithFreq) {
+        productsWithFreq[id] += 1;
+      } else {
+        productsWithFreq[id] = 1;
+      }
+    });
+    return productsWithFreq;
+  };
+  
+  useEffect(() => {
+    const updatedProductsWithFreq = updateProductsWithFreq(cartItems);
+    setProductsWithFreq(updatedProductsWithFreq);
+  }, [cartItems]);
+
+
+function increment(id) {
+
+    setProductsWithFreq(
+        (oldFreq) => {
+            var toIncrease = productsWithFreq[id] + 1;
+            return { ...oldFreq, [id]: toIncrease }
+        }
+    )
+
+    setcartItems(
+      (oldItems) => {
+        return [...oldItems, id]
+      }
+    )
+
+}
+
+function decrement(id) {
+    setProductsWithFreq(
+        (oldFreq) => {
+            var toDecrease = productsWithFreq[id] - 1;
+            if(toDecrease == 0){
+                return {...oldFreq}
+            }
+            return { ...oldFreq, [id]: toDecrease }
+        }
+    )
+}
+
+
   function addToCart(productId){
     setcartItems((prevItems) => {
       return [...prevItems, productId];
@@ -69,6 +118,7 @@ function App() {
       isLogged={isLogIn}
       initialIsLiked={likedItems.some((item) => item.id === eachItem.id)}
       addToCart = {addToCart}
+      productsWithFreq = {productsWithFreq}
     />
   ));
 
@@ -118,6 +168,8 @@ function App() {
                 isLogged={isLogIn}
                 onLikeToggle={handleLikeToggle}
                 updateLikedItems={updateLikedItems}
+                productsWithFreq={productsWithFreq}
+                addToCart = {addToCart}
               />
             }
           />
@@ -128,7 +180,10 @@ function App() {
           <Route 
             path="/cart"
             element = {
-            <Cart 
+            <Cart
+            productsWithFreq={productsWithFreq}
+              increment = {increment}
+              decrement = {decrement}
               deleteFromMainCart={deleteFromMainCart}
               cartItems = {cartItems}
             />

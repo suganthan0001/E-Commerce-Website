@@ -434,3 +434,18 @@ Link{
   }
 }
 
+.no-products-cart{
+  margin: 0 auto;
+  width: 100%;
+}
+
+.count-in-home{
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  border-radius: 50px;
+  border-style: solid 2px;
+  color: #219653;
+  font-weight: 600;
+}
+

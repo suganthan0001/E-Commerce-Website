@@ -1,7 +1,7 @@
 import React from "react";
 import Product from "./Product";
 
-export default function LikedItems({ likedItems, isLogged, onLikeToggle, updateLikedItems }) {
+export default function LikedItems({ likedItems, isLogged, onLikeToggle, updateLikedItems ,productsWithFreq,addToCart}) {
   return (
     <div className="liked--body">
       <h2>Liked Items</h2>
@@ -14,6 +14,8 @@ export default function LikedItems({ likedItems, isLogged, onLikeToggle, updateL
                 key={item.id}
                 isLogged={isLogged}
                 initialIsLiked={true} 
+                productsWithFreq={productsWithFreq}
+                addToCart={addToCart}
               />
             ))}
           </div>

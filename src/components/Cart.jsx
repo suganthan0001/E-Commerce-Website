@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import data from "../products.json";
 import CartProduct from "./CartProduct";
 
-export default function Cart({ cartItems ,deleteFromMainCart}) {
-    const [productsWithFreq, setProductsWithFreq] = useState({});
+export default function Cart({ cartItems ,deleteFromMainCart,increment,decrement,productsWithFreq}) {
     const [cartProducts,setCartProducts] = useState([]);
 
     useEffect(
@@ -15,51 +14,7 @@ export default function Cart({ cartItems ,deleteFromMainCart}) {
                 return cartProductsToReturn;
             })
         }
-    ,[cartItems]);
-
-    useEffect(() => {
-        cartProducts.forEach((item) => {
-            if (item.id in productsWithFreq) {
-                var toIncrease = productsWithFreq[item.id] + 1;
-                setProductsWithFreq(
-                    (oldFreq) => {
-                        return { ...oldFreq, [item.id]: toIncrease }
-                    }
-                )
-            } else {
-                setProductsWithFreq(
-                    (oldFreq) => {
-                        return { ...oldFreq, [item.id]: 1 }
-                    }
-                )
-            }
-        })
-    }, [data.products, cartItems,cartProducts]);
-
-
-    function increment(id) {
-
-        setProductsWithFreq(
-            (oldFreq) => {
-                var toIncrease = productsWithFreq[id] + 1;
-                return { ...oldFreq, [id]: toIncrease }
-            }
-        )
-
-    }
-
-    function decrement(id) {
-        setProductsWithFreq(
-            (oldFreq) => {
-                var toDecrease = productsWithFreq[id] - 1;
-                if(toDecrease == 0){
-                    return {...oldFreq}
-                }
-                return { ...oldFreq, [id]: toDecrease }
-            }
-        )
-        console.log(productsWithFreq);
-    }
+    ,[cartItems]);  
 
     function deleteCartItem(id){
         deleteFromMainCart(id);
@@ -76,6 +31,7 @@ export default function Cart({ cartItems ,deleteFromMainCart}) {
             decrement={decrement}
             item={eachItem}
             deleteCartItem={deleteCartItem}
+            key={eachItem.id}
         />
     })
 
@@ -99,6 +55,9 @@ export default function Cart({ cartItems ,deleteFromMainCart}) {
             <div className="cart-container">
                 <div className="cart-products">
                     {finalCartProducts}
+                    {finalCartProducts.length < 1 && <>
+                        <h1 className="no-products-cart">No Products in Cart</h1>
+                    </>}
                 </div>
 
                 <div className="price-details">

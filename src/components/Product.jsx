@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export default function Product({ addToCart,item, onLikeToggle, isLogged, initialIsLiked}) {
+export default function Product({ addToCart, item, onLikeToggle, isLogged, initialIsLiked, productsWithFreq }) {
   const [isLiked, setIsLiked] = useState(initialIsLiked);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export default function Product({ addToCart,item, onLikeToggle, isLogged, initia
     onLikeToggle(item.id);
   };
 
-  function handleAddToCart(){
+  function handleAddToCart() {
     addToCart(item.id)
   }
 
@@ -28,7 +28,7 @@ export default function Product({ addToCart,item, onLikeToggle, isLogged, initia
         <p className="product-description">{item.description}</p>
         <p className="product-price">₹{item.price.toFixed(2)}</p>
       </div>
-      <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
+      <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart </button>
       {isLogged && (
         <button
           className={`heart-button ${isLiked ? 'liked' : ''} heart`}
@@ -39,6 +39,9 @@ export default function Product({ addToCart,item, onLikeToggle, isLogged, initia
           </span>
         </button>
       )}
+      <div className="count-in-home">
+        {productsWithFreq[item.id]}
+      </div>
     </div>
   );
 }

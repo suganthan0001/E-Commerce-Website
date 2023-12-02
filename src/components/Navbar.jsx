@@ -5,7 +5,6 @@ function Navbar({ isScrolled, isLogged,cartArray}) {
   const navbarStyle = {
     backgroundColor: isScrolled ? "#cee87b" : "transparent",
   };
-  console.log(isLogged);
   return (
     <nav style={navbarStyle}>
       <div className="nav-left">

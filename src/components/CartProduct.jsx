@@ -23,9 +23,9 @@ function CartProduct({ item, increment, decrement, productsWithFreq ,deleteCartI
             </div>
             <div className="product-actions-cart">
                 <div className="quantity-controls-cart">
-                    <button className="quantity-btn-cart" onclick="decrementQuantity()" onClick={handleDecrement}>-</button>
+                    <button className="quantity-btn-cart" onClick={handleDecrement}>-</button>
                     <span className="quantity-cart">{productsWithFreq[item.id]}</span>
-                    <button className="quantity-btn-cart" onclick="incrementQuantity()" onClick={handleIncrement}>+</button>
+                    <button className="quantity-btn-cart" onClick={handleIncrement}>+</button>
                 </div>
                 <div className="delete-icon-container-cart" onClick={handleDelete}>
                     <i className="fa fa-trash delete-icon" aria-hidden="true"></i>
