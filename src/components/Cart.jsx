@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import data from "../products.json";
 import CartProduct from "./CartProduct";
+import { useNavigate } from "react-router-dom";
 
-export default function Cart({ cartItems ,deleteFromMainCart,increment,decrement,productsWithFreq}) {
-    const [cartProducts,setCartProducts] = useState([]);
+export default function Cart({ cartItems, deleteFromMainCart, increment, decrement, productsWithFreq }) {
+    const [cartProducts, setCartProducts] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(
         () => {
@@ -14,9 +16,9 @@ export default function Cart({ cartItems ,deleteFromMainCart,increment,decrement
                 return cartProductsToReturn;
             })
         }
-    ,[cartItems]);  
+        , [cartItems]);
 
-    function deleteCartItem(id){
+    function deleteCartItem(id) {
         deleteFromMainCart(id);
         const updatedCartProducts = cartProducts.filter(item => item.id !== id);
         setCartProducts(updatedCartProducts);
@@ -49,6 +51,16 @@ export default function Cart({ cartItems ,deleteFromMainCart,increment,decrement
             subtotal += (quan * price);
         }
     )
+
+    function toSummary(){
+        if(cartItems.length > 0){
+            navigate("/checkout"); 
+        }
+        else{
+            alert("Cart is Empty");
+        }
+    }
+
     let final = subtotal - (subtotal / 10)
     return (
         <>
@@ -64,6 +76,10 @@ export default function Cart({ cartItems ,deleteFromMainCart,increment,decrement
                     <h3>Subtotal : ₹{subtotal}</h3>
                     <h3>Discount : 10%</h3>
                     <h2>Total : {final}</h2>
+
+                    <div class="btn-c btn-one" onClick={toSummary}>
+                        <span>CHECKOUT</span>
+                    </div>
                 </div>
             </div>
         </>

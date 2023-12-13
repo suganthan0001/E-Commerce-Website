@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Outlet} from "react-router-dom";
 
 function Navbar({ isScrolled, isLogged,cartArray}) {
   const navbarStyle = {
     backgroundColor: isScrolled ? "#cee87b" : "transparent",
   };
   return (
+    <>
+    
     <nav style={navbarStyle}>
       <div className="nav-left">
         <Link to="/">Everything</Link>
@@ -27,6 +29,8 @@ function Navbar({ isScrolled, isLogged,cartArray}) {
       }
       </div>
     </nav>
+    <Outlet />
+    </>
   );
 }
 

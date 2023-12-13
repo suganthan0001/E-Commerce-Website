@@ -9,6 +9,7 @@ import LikedItems from "./components/LikedItems";
 import Cart from "./components/Cart";
 import data from "./products.json";
 import Signup from "./components/Signup";
+import Checkout from "./components/Checkout";
 
 function App() {
   const [searchContent, setSearchContent] = useState("");
@@ -28,20 +29,20 @@ function App() {
     });
     return productsWithFreq;
   };
-  
+
   useEffect(() => {
     const updatedProductsWithFreq = updateProductsWithFreq(cartItems);
     setProductsWithFreq(updatedProductsWithFreq);
   }, [cartItems]);
 
 
-function increment(id) {
+  function increment(id) {
 
     setProductsWithFreq(
-        (oldFreq) => {
-            var toIncrease = productsWithFreq[id] + 1;
-            return { ...oldFreq, [id]: toIncrease }
-        }
+      (oldFreq) => {
+        var toIncrease = productsWithFreq[id] + 1;
+        return { ...oldFreq, [id]: toIncrease }
+      }
     )
 
     setcartItems(
@@ -50,34 +51,34 @@ function increment(id) {
       }
     )
 
-}
+  }
 
-function decrement(id) {
+  function decrement(id) {
     setProductsWithFreq(
-        (oldFreq) => {
-            var toDecrease = productsWithFreq[id] - 1;
-            if(toDecrease == 0){
-                return {...oldFreq}
-            }
-            return { ...oldFreq, [id]: toDecrease }
+      (oldFreq) => {
+        var toDecrease = productsWithFreq[id] - 1;
+        if (toDecrease == 0) {
+          return { ...oldFreq }
         }
+        return { ...oldFreq, [id]: toDecrease }
+      }
     )
-}
+  }
 
 
-  function addToCart(productId){
+  function addToCart(productId) {
     setcartItems((prevItems) => {
       return [...prevItems, productId];
     })
   }
 
-  function deleteFromMainCart(id){
+  function deleteFromMainCart(id) {
     setcartItems((prevItems) => {
       const withDeletedItem = prevItems.filter(item => item != id)
       return withDeletedItem;
     })
   }
-  
+
   const updateLikedItems = (newLikedItems) => {
     setLikedItems(newLikedItems);
   };
@@ -117,8 +118,8 @@ function decrement(id) {
       onLikeToggle={() => handleLikeToggle(eachItem.id)}
       isLogged={isLogIn}
       initialIsLiked={likedItems.some((item) => item.id === eachItem.id)}
-      addToCart = {addToCart}
-      productsWithFreq = {productsWithFreq}
+      addToCart={addToCart}
+      productsWithFreq={productsWithFreq}
     />
   ));
 
@@ -134,12 +135,12 @@ function decrement(id) {
     };
   }, []);
 
-  
+
 
   return (
     <Router>
       <>
-        <Navbar isScrolled={isNavbarScrolled} isLogged={isLogIn} cartArray = {cartItems}/>
+        <Navbar isScrolled={isNavbarScrolled} isLogged={isLogIn} cartArray={cartItems} />
         <Routes>
           <Route
             path="/"
@@ -169,7 +170,7 @@ function decrement(id) {
                 onLikeToggle={handleLikeToggle}
                 updateLikedItems={updateLikedItems}
                 productsWithFreq={productsWithFreq}
-                addToCart = {addToCart}
+                addToCart={addToCart}
               />
             }
           />
@@ -177,17 +178,23 @@ function decrement(id) {
             path="/signup"
             element={<Signup />}
           />
-          <Route 
+          <Route
             path="/cart"
+            element={
+              <Cart
+                productsWithFreq={productsWithFreq}
+                increment={increment}
+                decrement={decrement}
+                deleteFromMainCart={deleteFromMainCart}
+                cartItems={cartItems}
+              />
+            }
+          />
+          <Route 
+            path="/checkout"
             element = {
-            <Cart
-            productsWithFreq={productsWithFreq}
-              increment = {increment}
-              decrement = {decrement}
-              deleteFromMainCart={deleteFromMainCart}
-              cartItems = {cartItems}
-            />
-          }
+              <Checkout />
+            }
           />
         </Routes>
       </>

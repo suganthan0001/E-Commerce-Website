@@ -25,8 +25,8 @@ export default function LoginForm({loginSuccess}) {
       <div className="login-page">
         <div className="form">
           <form className="login-form" onSubmit={handleLogin}>
-            <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required/>
+            <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
             <button type="submit">Login</button>
             <p className="message">
               Not registered? <Link to="/signup">Create an account</Link>
