@@ -1,8 +1,17 @@
-# React + Vite
+# E - Commerce Website 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Key Features --**
+**Product Catalog:** List of products with images, descriptions, prices,
+and a search functionality.
 
-Currently, two official plugins are available:
+**User Authentication** : User registration and login functionality.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Shopping Cart:** Allows users to add and remove products from their cart.
+and displays the total price.
+
+**Wishlist:** A wishlist feature where users can add and remove
+products they are interested in.
+
+**Mock Data:** Use hardcoded or JSON data to represent products, categories,
+prices, and orders.
+
