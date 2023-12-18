@@ -1,6 +1,7 @@
 # E - Commerce Website 
 
 **Key Features --**
+
 **Product Catalog:** List of products with images, descriptions, prices,
 and a search functionality.
 
