@@ -10,7 +10,7 @@ import Cart from "./components/Cart";
 import data from "./products.json";
 import Signup from "./components/Signup";
 import Checkout from "./components/Checkout";
-
+import Back from "./components/Back";
 function App() {
   const [searchContent, setSearchContent] = useState("");
   const [isNavbarScrolled, setNavbarScrolled] = useState(false);
@@ -37,7 +37,6 @@ function App() {
 
 
   function increment(id) {
-
     setProductsWithFreq(
       (oldFreq) => {
         var toIncrease = productsWithFreq[id] + 1;
@@ -50,7 +49,6 @@ function App() {
         return [...oldItems, id]
       }
     )
-
   }
 
   function decrement(id) {
@@ -136,16 +134,15 @@ function App() {
   }, []);
 
 
-
   return (
     <Router>
       <>
-        <Navbar isScrolled={isNavbarScrolled} isLogged={isLogIn} cartArray={cartItems} />
         <Routes>
           <Route
             path="/"
             element={
               <>
+                <Navbar isScrolled={isNavbarScrolled} isLogged={isLogIn} cartArray={cartItems} />
                 <SearchBar onSearch={handleSearch} />
                 {productsArray.length > 0 ? (
                   <div className="products-container">{productsArray}</div>
@@ -159,41 +156,61 @@ function App() {
           />
           <Route
             path="/login"
-            element={<LoginForm loginSuccess={handleLogin} />}
+            element={
+              <>
+                <Navbar isScrolled={isNavbarScrolled} isLogged={isLogIn} cartArray={cartItems} />
+                <LoginForm loginSuccess={handleLogin} />
+              </>
+            }
           />
           <Route
             path="/likedItems"
             element={
-              <LikedItems
-                likedItems={likedItems}
-                isLogged={isLogIn}
-                onLikeToggle={handleLikeToggle}
-                updateLikedItems={updateLikedItems}
-                productsWithFreq={productsWithFreq}
-                addToCart={addToCart}
-              />
+              <>
+                <Navbar isScrolled={isNavbarScrolled} isLogged={isLogIn} cartArray={cartItems} />
+                <LikedItems
+                  likedItems={likedItems}
+                  isLogged={isLogIn}
+                  onLikeToggle={handleLikeToggle}
+                  updateLikedItems={updateLikedItems}
+                  productsWithFreq={productsWithFreq}
+                  addToCart={addToCart}
+                />
+              </>
             }
           />
           <Route
             path="/signup"
-            element={<Signup />}
+            element={
+              <>
+                <Navbar isScrolled={isNavbarScrolled} isLogged={isLogIn} cartArray={cartItems} />
+                <Signup />
+              </>
+
+            }
           />
           <Route
             path="/cart"
             element={
-              <Cart
-                productsWithFreq={productsWithFreq}
-                increment={increment}
-                decrement={decrement}
-                deleteFromMainCart={deleteFromMainCart}
-                cartItems={cartItems}
-              />
+              <>
+                <Navbar isScrolled={isNavbarScrolled} isLogged={isLogIn} cartArray={cartItems} />
+                <Cart
+                  productsWithFreq={productsWithFreq}
+                  increment={increment}
+                  decrement={decrement}
+                  deleteFromMainCart={deleteFromMainCart}
+                  cartItems={cartItems}
+                />
+              </>
             }
           />
-          <Route 
+          <Route
             path="/checkout"
-            element = {
-              <Checkout />
+            element={
+              <>
+              <Back />
+              <Checkout data={data} productsWithFreq={productsWithFreq}/>
+              </>
             }
           />
         </Routes>

@@ -1,76 +1,82 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 
-function Checkout() {
-  return (
-    <>
-    <div className="border-checkout">
+function Checkout({ data, productsWithFreq }) {
 
-    
-      <div className="checkout-card vertical">
-        {/* Delivery Address */}
-        <div className="section delivery-address">
-          <h2>Delivery Address</h2>
-          <p>
-            Choose an existing address or create a new one for delivery.
-          </p>
-          <div className="address-options">
-            {/* List of existing addresses */}
-            <p>No existing addresses found. Click "Create New" below.</p>
-            {/* Button to create new address */}
-            <button className="create-address-btn">Create New</button>
-          </div>
-        </div>
+    function findNameForId(id) {
+        return data.products.find((product) => product.id === id)?.name;
+    }
 
-        {/* Order Summary */}
-        <div className="section order-summary">
-          <h2>Order Summary</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* List of items with quantity and price */}
-              {/* Example entry */}
-              <tr>
-                <td>Product Name</td>
-                <td>2</td>
-                <td>$50.00</td>
-              </tr>
-            </tbody>
-          </table>
-          <div className="total-price">
-            <p>Total Price:</p>
-            <span>$100.00</span>
-          </div>
-        </div>
+    function findPriceForId(id) {
+        return data.products.find((product) => product.id === id)?.price;
+    }
 
-        {/* Payment Options */}
-        <div className="section payment-options">
-          <h2>Payment Options</h2>
-          <div className="payment-method">
-            <input type="radio" id="cash-on-delivery" name="payment" />
-            <label htmlFor="cash-on-delivery">Cash on Delivery</label>
-          </div>
-          <div className="payment-method">
-            <button className="pay-using-upi">Pay using UPI</button>
-            {/* Implement functional UPI payment integration here */}
-            <p className="payment-info">
-              Note: UPI payment functionality is not yet implemented.
-            </p>
-          </div>
-        </div>
+    let subtotal = 0;
+    const tableRows = Object.keys(productsWithFreq).map(
+        (id) => {
+            subtotal += findPriceForId(id) * productsWithFreq[id];
+            return (
+                <tr>
+                    <td>{findNameForId(id)}</td>
+                    <td>{productsWithFreq[id]}</td>
+                    <td>{findPriceForId(id) * productsWithFreq[id]}</td>
+                </tr>
+            )
+        }
+    )
+    subtotal -= subtotal/10;
 
-        {/* Submit Order Button */}
-        <button className="submit-order-btn">Place Order</button>
-      </div>
+    return (
+        <>
+            <div className="border-checkout">
+                <div className="checkout-card vertical">
+                    <div className="section delivery-address">
+                        <h2>Delivery Address</h2>
+                        <p>
+                            Choose an existing address or create a new one for delivery.
+                        </p>
+                        <div className="address-options">
 
-      </div>
-    </>
-  );
+                            <p>No existing addresses found. Click "Create New" below.</p>
+
+                            <button className="create-address-btn">Create New</button>
+                        </div>
+                    </div>
+                    <div className="section order-summary">
+                        <h2>Order Summary</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {tableRows}
+                            </tbody>
+                        </table>
+                        <div className="total-price">
+                            <p>Total Price:</p>
+                            <span>${subtotal}</span>
+                        </div>
+                    </div>
+                    <div className="section payment-options">
+                        <h2>Payment Options</h2>
+                        <div className="payment-method-cod">
+                            <input type="radio" id="cash-on-delivery" name="payment" />
+                            <label htmlFor="cash-on-delivery">Cash on Delivery</label>
+                            <br />
+                            <input type="radio" id="cash-on-delivery" name="payment" />
+                            <label htmlFor="cash-on-delivery">Pay Using UPI</label>
+                        </div>
+                    </div>
+                    <div>
+                        <a href="" className="submit-order-btn btnp btn--doar" data-content={subtotal}>PAY</a>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 }
 
 export default Checkout;
