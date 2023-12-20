@@ -16,3 +16,5 @@ products they are interested in.
 **Mock Data:** Use hardcoded or JSON data to represent products, categories,
 prices, and orders.
 
+
+Hosted In : https://lucent-paletas-94ca3f.netlify.app/
