@@ -20,4 +20,4 @@ prices, and orders.
 Till now not Optimized for mobiles and no Databases are used. 
 Data is been hardcoded.
 
-Hosted In : https://lucent-paletas-94ca3f.netlify.app/
+Hosted In : https://organica-store.netlify.app/
