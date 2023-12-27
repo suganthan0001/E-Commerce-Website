@@ -23,7 +23,7 @@ function App() {
 
   async function checkoutStripe(){
 
-    await fetch("http://localhost:3000/checkout", {
+    await fetch("https://organic-store-9jki.onrender.com/checkout", {
       method: "POST",
       headers: {
         'Content-Type' : 'application/json'
